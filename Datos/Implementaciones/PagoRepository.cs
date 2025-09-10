@@ -1,0 +1,89 @@
+﻿using LOCURA.Datos.Interfaces;
+using LOCURA.Dominio;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LOCURA.Datos.Implementaciones
+{
+    public class PagoRepository : IPago
+    {
+        public bool Delete(int id)
+        {
+            List<SpParameter> param = new List<SpParameter>()
+            {
+                new SpParameter("@id", id)
+            };
+
+            return DataHelper.GetInstance().ExecuteSpDml("SP_DAR_BAJA_FORMA_PAGO", param);
+        }
+
+        public List<FormaPago> GetAll()
+        {
+            List<FormaPago> fps = new List<FormaPago>();
+
+            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_FORMAS_PAGO");
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                FormaPago fp = new FormaPago();
+                fp.Id = (int)fila["id_forma_pago"];
+                fp.Nombre = fila["nombre"].ToString();
+
+                fps.Add(fp);
+            }
+
+            return fps;
+        }
+
+        public FormaPago? GetById(int id)
+        {
+            List<SpParameter> param = new List<SpParameter>()
+            {
+                new SpParameter("@id", id)
+            };
+
+            FormaPago fp = new FormaPago();
+
+            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_FORMA_PAGO_POR_ID", param);
+
+            if(dt.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            foreach (DataRow fila in dt.Rows)
+            {
+                fp.Id = (int)fila["id_forma_pago"];
+                fp.Nombre = fila["nombre"].ToString();
+            }
+
+            return fp;
+        }
+
+        public bool Save(FormaPago fp)
+        {
+            List<SpParameter> param = new List<SpParameter>
+            {
+                new SpParameter("@nombre", fp.Nombre)
+            };
+
+            return DataHelper.GetInstance().ExecuteSpDml("SP_GUARDAR_FORMA_PAGO", param);
+        }
+
+        public bool Update(int id, FormaPago fp)
+        {
+            List<SpParameter> param = new List<SpParameter>
+            {
+                new SpParameter("id", id),
+                new SpParameter("@nombre", fp.Nombre)
+            };
+
+            return DataHelper.GetInstance().ExecuteSpDml("SP_ACTUALIZAR_FORMAS_PAGO", param);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DD9A3D90-535A-4579-A2D1-7204A28C6AA3}|proyecto[Practica01].csproj|c:\\users\\galbo\\onedrive\\desktop\\proyecto[practica01]\\datos\\implementaciones\\articulorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD9A3D90-535A-4579-A2D1-7204A28C6AA3}|proyecto[Practica01].csproj|solutionrelative:datos\\implementaciones\\articulorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ArticuloRepository.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\Datos\\Implementaciones\\ArticuloRepository.cs",
+              "RelativeDocumentMoniker": "Datos\\Implementaciones\\ArticuloRepository.cs",
+              "ToolTip": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\Datos\\Implementaciones\\ArticuloRepository.cs",
+              "RelativeToolTip": "Datos\\Implementaciones\\ArticuloRepository.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T01:47:19.768Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

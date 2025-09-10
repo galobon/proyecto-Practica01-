@@ -1,0 +1,10 @@
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.csproj.AssemblyReference.cache
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.Properties.Resources.resources
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.csproj.GenerateResource.cache
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.csproj.CoreCompileInputs.cache
+C:\Users\galbo\source\repos\LOCURA\bin\Debug\LOCURA.exe.config
+C:\Users\galbo\source\repos\LOCURA\bin\Debug\LOCURA.exe
+C:\Users\galbo\source\repos\LOCURA\bin\Debug\LOCURA.pdb
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.exe
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.pdb
+C:\Users\galbo\source\repos\LOCURA\obj\Debug\LOCURA.exe.config
