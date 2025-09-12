@@ -14,6 +14,6 @@ namespace LOCURA.Datos.Interfaces
         FormaPago GetById(int id);
         bool Save(FormaPago fp);
         bool Delete(int id);
-        bool Update(int id, FormaPago fp);
+        bool Update(FormaPago fp);
     }
 }

@@ -37,9 +37,9 @@ namespace LOCURA.Servicios
             return _repository.Delete(id);
         }
 
-        public bool UpdateArticulo(int id, Articulo a)
+        public bool UpdateArticulo(Articulo a)
         {
-            return _repository.Update(id, a);
+            return _repository.Update(a);
         }
 
     }

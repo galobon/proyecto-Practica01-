@@ -13,7 +13,7 @@ namespace LOCURA.Datos
         Factura GetById(int id);
         bool Save(Factura f);
         bool Delete(int id);
-        bool Update(int id, Factura f);
+        bool Update(Factura f);
 
     }
 }

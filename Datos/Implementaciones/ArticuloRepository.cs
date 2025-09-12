@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,26 +69,72 @@ namespace LOCURA.Datos
 
         public bool Save(Articulo a)
         {
-            List<SpParameter> param = new List<SpParameter>()
-            {
-                new SpParameter("@nombre",a.Nombre),
-                new SpParameter("@precio_u",a.PrecioU)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_GUARDAR_ARTICULO", param);
+            //try
+            //{
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_GUARDAR_ARTICULO";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", a.Nombre);
+                cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            //}
+            //catch (Exception)
+            //{
+                //if (t != null)
+                //    t.Rollback();
+                //ok = false;
+            //}
+            //finally
+            //{
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            //}
+            return ok;
         }
 
-        public bool Update(int id, Articulo a)
+        public bool Update(Articulo a)
         {
 
-            List<SpParameter> param = new List<SpParameter>()
-            {
-                new SpParameter("@id_articulo", id),
-                new SpParameter("@nombre",a.Nombre),
-                new SpParameter("@precio_u",a.PrecioU)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_ACTUALIZAR_ARTICULO", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_ACTUALIZAR_ARTICULO";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_articulo", a.Id);
+                cmd.Parameters.AddWithValue("@nombre", a.Nombre);
+                cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            }
+            catch (Exception)
+            {
+                if (t != null)
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return ok;
         }
     }
 }

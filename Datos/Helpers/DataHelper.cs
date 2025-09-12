@@ -101,7 +101,10 @@ namespace LOCURA.Datos
             return result;
         }
 
-
+        public SqlConnection GetConnection()
+        {
+            return this._connection;
+        }
 
     }
 }

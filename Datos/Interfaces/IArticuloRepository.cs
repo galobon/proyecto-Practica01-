@@ -13,6 +13,6 @@ namespace LOCURA.Datos
         Articulo GetById(int id);
         bool Save(Articulo a);
         bool Delete(int id);
-        bool Update(int id, Articulo a);
+        bool Update(Articulo a);
     }
 }

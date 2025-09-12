@@ -3,6 +3,7 @@ using LOCURA.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -67,23 +68,69 @@ namespace LOCURA.Datos.Implementaciones
 
         public bool Save(FormaPago fp)
         {
-            List<SpParameter> param = new List<SpParameter>
-            {
-                new SpParameter("@nombre", fp.Nombre)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_GUARDAR_FORMA_PAGO", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_GUARDAR_FORMA_PAGO";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nombre", fp.Nombre);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            }
+            catch (Exception)
+            {
+                if(t != null)
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return ok;
         }
 
-        public bool Update(int id, FormaPago fp)
+        public bool Update(FormaPago fp)
         {
-            List<SpParameter> param = new List<SpParameter>
-            {
-                new SpParameter("id", id),
-                new SpParameter("@nombre", fp.Nombre)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_ACTUALIZAR_FORMAS_PAGO", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_ACTUALIZAR_FORMAS_PAGO";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", fp.Id);
+                cmd.Parameters.AddWithValue("@nombre", fp.Nombre);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+                if (t != null) t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return ok;           
         }
     }
 }

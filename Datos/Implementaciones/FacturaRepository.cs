@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Data.SqlClient;
 
 namespace LOCURA.Datos
 {
@@ -72,29 +73,108 @@ namespace LOCURA.Datos
 
         public bool Save(Factura f)
         {
-            List<SpParameter> param = new List<SpParameter>()
-            {
-                new SpParameter("@fecha", f.Fecha),    
-                new SpParameter("@id_forma_pago",f.FormaPago.Id),
-                new SpParameter("@cliente",f.Cliente)               
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_GUARDAR_FACTURA", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_GUARDAR_FACTURA";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@fecha", f.Fecha);
+                cmd.Parameters.AddWithValue("@id_forma_pago", f.FormaPago.Id);
+                cmd.Parameters.AddWithValue("@cliente", f.Cliente);
+
+                SqlParameter pOut = new SqlParameter();
+                pOut.ParameterName = "@nro_factura";
+                pOut.DbType = DbType.Int32;
+                pOut.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pOut);
+                cmd.ExecuteNonQuery();
+
+                SqlCommand cmdDetalle;
+                int nroFactura = (int)pOut.Value;
+
+                foreach (DetalleFactura item in f.Detalles)
+                {
+                    cmdDetalle = new SqlCommand("SP_GUARDAR_DETALLE_FACTURAS",cnn,t);
+                    cmdDetalle.CommandType = CommandType.StoredProcedure;
+                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.Id);
+                    cmdDetalle.Parameters.AddWithValue("@nro_factura", nroFactura);
+                    cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                    cmdDetalle.ExecuteNonQuery();
+                }
+                t.Commit();
+            }
+            catch (Exception)
+            {
+
+                if (t != null) 
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+
+            return ok;
         }
 
-        public bool Update(int id, Factura f)
+        public bool Update(Factura f)
         {
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            List<SpParameter> param = new List<SpParameter>()
+            try
             {
-                new SpParameter("@nro_factura", id),
-                new SpParameter("@fecha", f.Fecha),
-                new SpParameter("@id_forma_pago",f.FormaPago.Id),
-                new SpParameter("@cliente",f.Cliente)
-            };
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_ACTUALIZAR_FACTURA";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@nro_factura", f.NroFactura);
+                cmd.Parameters.AddWithValue("@fecha", f.Fecha);
+                cmd.Parameters.AddWithValue("@id_forma_pago", f.FormaPago.Id);
+                cmd.Parameters.AddWithValue("@cliente", f.Cliente);
+                cmd.ExecuteNonQuery();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_ACTUALIZAR_FACTURA", param);
+                SqlCommand cmdDetalle;
+                foreach (DetalleFactura item in f.Detalles)
+                {
+                    cmdDetalle = new SqlCommand("SP_GUARDAR_DETALLE_FACTURAS", cnn, t);
+                    cmdDetalle.CommandType = CommandType.StoredProcedure;
+                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.Id);
+                    cmdDetalle.Parameters.AddWithValue("@nro_factura", f.NroFactura);
+                    cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                    cmdDetalle.ExecuteNonQuery();
+                }
+                t.Commit();
 
+
+            }
+            catch (Exception)
+            {
+                if (t != null) 
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if(cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+
+            return ok;
         }
     }
 }

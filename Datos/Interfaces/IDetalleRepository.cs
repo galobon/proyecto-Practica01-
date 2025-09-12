@@ -13,6 +13,6 @@ namespace LOCURA.Datos.Interfaces
         DetalleFactura GetById(int id);
         bool Save(DetalleFactura df);
         bool Delete(int id);
-        bool Update(int id, DetalleFactura df);
+        bool Update(DetalleFactura df);
     }
 }

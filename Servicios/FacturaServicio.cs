@@ -33,9 +33,9 @@ namespace LOCURA.Servicios
         {
             return _reposritory.Delete(id);
         }
-        public bool UpdateFactura(int id, Factura f)
+        public bool UpdateFactura(Factura f)
         {
-            return _reposritory.Update(id, f);
+            return _reposritory.Update(f);
         }
     }
 }

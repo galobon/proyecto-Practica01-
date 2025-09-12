@@ -3,6 +3,7 @@ using LOCURA.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -75,27 +76,73 @@ namespace LOCURA.Datos.Implementaciones
 
         public bool Save(DetalleFactura df)
         {
-            List<SpParameter> param = new List<SpParameter>
-            {
-                new SpParameter("@id_articulo", df.Articulo.Id),
-                new SpParameter("@nro_factura", df.NroFactura.NroFactura),
-                new SpParameter("@cantidad", df.Cantidad)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_GUARDAR_DETALLE_FACTURAS", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_GUARDAR_DETALLE_FACTURAS";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_articulo", df.Articulo.Id);
+                cmd.Parameters.AddWithValue("@nro_factura", df.NroFactura.NroFactura);
+                cmd.Parameters.AddWithValue("@cantidad", df.Cantidad);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            }
+            catch (Exception)
+            {
+                if (t != null)
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return ok;        
         }
 
-        public bool Update(int id, DetalleFactura df)
+        public bool Update(DetalleFactura df)
         {
-            List<SpParameter> param = new List<SpParameter>
-            {
-                new SpParameter("@id", id),
-                new SpParameter("@id_articulo", df.Articulo.Id),
-                new SpParameter("@nro_factura", df.NroFactura.NroFactura),
-                new SpParameter("@cantidad", df.Cantidad)
-            };
+            bool ok = true;
+            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
+            SqlTransaction t = null;
+            SqlCommand cmd = new SqlCommand();
 
-            return DataHelper.GetInstance().ExecuteSpDml("SP_ACTUALIZAR_DETALLE_FACTURAS", param);
+            try
+            {
+                cnn.Open();
+                t = cnn.BeginTransaction();
+                cmd.Connection = cnn;
+                cmd.Transaction = t;
+                cmd.CommandText = "SP_ACTUALIZAR_DETALLE_FACTURAS";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", df.Id);
+                cmd.Parameters.AddWithValue("@id_articulo", df.Articulo.Id);
+                cmd.Parameters.AddWithValue("@nro_factura", df.NroFactura.NroFactura);
+                cmd.Parameters.AddWithValue("@cantidad", df.Cantidad);
+                cmd.ExecuteNonQuery();
+                t.Commit();
+            }
+            catch (Exception)
+            {
+                if (t != null)
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
+                if (cnn != null && cnn.State == ConnectionState.Open)
+                    cnn.Close();
+            }
+            return ok;           
         }
     }
 }
