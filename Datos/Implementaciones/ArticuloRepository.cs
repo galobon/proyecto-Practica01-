@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -74,8 +74,8 @@ namespace LOCURA.Datos
             SqlTransaction t = null;
             SqlCommand cmd = new SqlCommand();
 
-            //try
-            //{
+            try
+            {
                 cnn.Open();
                 t = cnn.BeginTransaction();
                 cmd.Connection = cnn;
@@ -86,18 +86,18 @@ namespace LOCURA.Datos
                 cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
                 cmd.ExecuteNonQuery();
                 t.Commit();
-            //}
-            //catch (Exception)
-            //{
-                //if (t != null)
-                //    t.Rollback();
-                //ok = false;
-            //}
-            //finally
-            //{
+            }
+            catch (Exception)
+            {
+                if (t != null)
+                    t.Rollback();
+                ok = false;
+            }
+            finally
+            {
                 if (cnn != null && cnn.State == ConnectionState.Open)
                     cnn.Close();
-            //}
+            }
             return ok;
         }
 

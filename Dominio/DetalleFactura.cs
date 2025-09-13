@@ -9,13 +9,13 @@ namespace LOCURA.Dominio
     public class DetalleFactura
     {
         public int Id { get; set; }
-        public Factura NroFactura { get; set; }
+        public int NroFactura { get; set; }
         public Articulo Articulo { get; set; }
         public int Cantidad { get; set; }
 
         public override string ToString()
         {
-            return "ID: " +Id + " - Factura: " + NroFactura.NroFactura + " - Artículo: " + Articulo.Id + " - Cantidad: " + Cantidad;
+            return "ID: " +Id + " - Factura: " + NroFactura + " - Artículo: " + Articulo.Id + " - Cantidad: " + Cantidad;
         }
     }
 }

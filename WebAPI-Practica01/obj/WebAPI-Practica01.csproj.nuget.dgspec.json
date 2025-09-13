@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\WebAPI-Practica01\\WebAPI-Practica01.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\proyecto[Practica01].csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\proyecto[Practica01].csproj",
+        "projectName": "proyecto[Practica01]",
+        "projectPath": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\proyecto[Practica01].csproj",
+        "UsingMicrosoftNETSdk": false,
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\WebAPI-Practica01\\WebAPI-Practica01.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\WebAPI-Practica01\\WebAPI-Practica01.csproj",
+        "projectName": "WebAPI-Practica01",
+        "projectPath": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\WebAPI-Practica01\\WebAPI-Practica01.csproj",
+        "packagesPath": "C:\\Users\\galbo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\WebAPI-Practica01\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\galbo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\proyecto[Practica01].csproj": {
+                "projectPath": "C:\\Users\\galbo\\OneDrive\\Desktop\\proyecto[Practica01]\\proyecto[Practica01].csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.1.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

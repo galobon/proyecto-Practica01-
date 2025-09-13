@@ -1,0 +1,259 @@
+{
+  "info": {
+    "name": "WebAPI_Practica01",
+    "_postman_id": "f2b6b2a0-d1a5-4c68-8f7d-0e9876c4c123",
+    "description": "Colección para probar todos los endpoints de Facturas, Artículos y Formas de Pago",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Facturas",
+      "item": [
+        {
+          "name": "GET Todas Facturas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Factura",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Factura"]
+            }
+          }
+        },
+        {
+          "name": "GET Factura por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Factura/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Factura", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Nueva Factura",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha\": \"2025-09-13T00:00:00\",\n  \"formaPago\": { \"id\": 1, \"nombre\": \"Efectivo\" },\n  \"cliente\": \"Juan Perez\",\n  \"detalles\": [\n    { \"id\": 1, \"articulo\": {\"id\": 2}, \"cantidad\": 5 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Factura",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Factura"]
+            }
+          }
+        },
+        {
+          "name": "PUT Actualizar Factura",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha\": \"2025-09-14T00:00:00\",\n  \"formaPago\": { \"id\": 1, \"nombre\": \"Efectivo\" },\n  \"cliente\": \"Juan Perez\",\n  \"detalles\": [\n    { \"id\": 1, \"articulo\": {\"id\": 2}, \"cantidad\": 10 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Factura/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Factura", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE Factura",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Factura/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Factura", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Articulos",
+      "item": [
+        {
+          "name": "GET Todos Artículos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Articulo",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Articulo"]
+            }
+          }
+        },
+        {
+          "name": "GET Artículo por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Articulo/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Articulo", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Nuevo Artículo",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Martillo\",\n  \"precioU\": 500,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Articulo",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Articulo"]
+            }
+          }
+        },
+        {
+          "name": "PUT Actualizar Artículo",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Martillo Actualizado\",\n  \"precioU\": 600,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Articulo/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Articulo", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE Artículo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Articulo/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Articulo", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "FormasPago",
+      "item": [
+        {
+          "name": "GET Todas Formas de Pago",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Pago",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Pago"]
+            }
+          }
+        },
+        {
+          "name": "GET Forma de Pago por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Pago/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Pago", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Nueva Forma de Pago",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Tarjeta de Crédito\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Pago",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Pago"]
+            }
+          }
+        },
+        {
+          "name": "PUT Actualizar Forma de Pago",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Tarjeta de Débito\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7259/api/Pago/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Pago", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE Forma de Pago",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7259/api/Pago/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "7259",
+              "path": ["api", "Pago", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

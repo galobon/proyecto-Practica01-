@@ -1,6 +1,6 @@
 USE [facturacion_P1]
 GO
-/****** Object:  Table [dbo].[Articulos]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  Table [dbo].[Articulos]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -16,23 +16,24 @@ CREATE TABLE [dbo].[Articulos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Detalles_factura]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  Table [dbo].[Detalles_factura]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Detalles_factura](
-	[id_det_factura] [int] IDENTITY(1,1) NOT NULL,
-	[nro_factura] [int] NULL,
+	[id_det_factura] [int] NOT NULL,
+	[nro_factura] [int] NOT NULL,
 	[id_articulo] [int] NULL,
 	[cantidad] [int] NULL,
  CONSTRAINT [pk_det_facturas] PRIMARY KEY CLUSTERED 
 (
+	[nro_factura] ASC,
 	[id_det_factura] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Facturas]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  Table [dbo].[Facturas]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -49,7 +50,7 @@ CREATE TABLE [dbo].[Facturas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Formas_pago]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  Table [dbo].[Formas_pago]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -85,51 +86,41 @@ REFERENCES [dbo].[Formas_pago] ([id_forma_pago])
 GO
 ALTER TABLE [dbo].[Facturas] CHECK CONSTRAINT [fk_fp_facturas]
 GO
---INSERTS
---Formas de pago
-insert into Formas_pago (nombre) values
-('Efectivo'),
-('Tarjeta de Crédito'),
-('Tarjeta de Débito'),
-('Transferencia Bancaria'),
-('Cheque');
+--Inserts
+USE [facturacion_P1]
+GO
 
---Articulos
-insert into Articulos (nombre, precio_u) values
-('Tornillo 3mm', 15),
-('Tuerca 5mm', 10),
-('Arandela metálica', 5),
-('Martillo', 2500),
-('Taladro eléctrico', 18000),
-('Llave inglesa', 3500),
-('Soldadora MIG', 120000);
+-- INSERT Formas de Pago
+INSERT INTO Formas_pago (nombre, activo) VALUES ('Efectivo', 1);
+INSERT INTO Formas_pago (nombre, activo) VALUES ('Tarjeta de Crédito', 1);
+INSERT INTO Formas_pago (nombre, activo) VALUES ('Transferencia', 1);
 
---Facturas
-insert into Facturas (fecha, id_forma_pago, cliente) values
-('2025-09-01', 1, 'Juan Pérez'),
-('2025-09-02', 2, 'Carla López'),
-('2025-09-03', 1, 'Metalúrgica El Fuerte S.A.'),
-('2025-09-04', 3, 'Diego Fernández');
+-- INSERT Artículos
+INSERT INTO Articulos (nombre, precio_u, activo) VALUES ('Martillo', 500, 1);
+INSERT INTO Articulos (nombre, precio_u, activo) VALUES ('Taladro', 1500, 1);
+INSERT INTO Articulos (nombre, precio_u, activo) VALUES ('Destornillador', 200, 1);
+INSERT INTO Articulos (nombre, precio_u, activo) VALUES ('Sierra', 1200, 1);
 
---Detalles de Facturas
-insert into Detalles_factura (nro_factura, id_articulo, cantidad) values
-(1, 1, 50),
-(1, 2, 30),
-(1, 3, 20);
+-- INSERT Facturas
+INSERT INTO Facturas (fecha, id_forma_pago, cliente, activo) VALUES ('2025-09-12', 1, 'Juan Perez', 1);
+INSERT INTO Facturas (fecha, id_forma_pago, cliente, activo) VALUES ('2025-09-12', 2, 'Maria Gomez', 1);
+INSERT INTO Facturas (fecha, id_forma_pago, cliente, activo) VALUES ('2025-09-13', 3, 'Carlos Lopez', 1);
 
-insert into Detalles_factura (nro_factura, id_articulo, cantidad) values
-(2, 4, 1),
-(2, 6, 2);
+-- INSERT Detalles_factura
+-- Para Factura 1
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (1, 1, 1, 2);
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (2, 1, 2, 1);
 
-insert into Detalles_factura (nro_factura, id_articulo, cantidad) values
-(3, 5, 1),    
-(3, 7, 1);   
+-- Para Factura 2
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (1, 2, 3, 5);
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (2, 2, 4, 2);
 
-insert into Detalles_factura (nro_factura, id_articulo, cantidad) values
-(4, 2, 100),
-(4, 1, 100);
+-- Para Factura 3
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (1, 3, 1, 1);
+INSERT INTO Detalles_factura (id_det_factura, nro_factura, id_articulo, cantidad) VALUES (2, 3, 3, 3);
 
-/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_ARTICULO]    Script Date: 12/9/2025 13:17:40 ******/
+
+/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_ARTICULO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -143,23 +134,23 @@ BEGIN
     UPDATE Articulos set nombre=@nombre, precio_u=@precio_u where id_articulo=@id_articulo
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_DETALLE_FACTURAS]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_DETALLE_FACTURAS]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROC [dbo].[SP_ACTUALIZAR_DETALLE_FACTURAS]
-	@id int,
+	@id_det_factura int,
     @id_articulo int,
 	@nro_factura int,
 	@cantidad int
 AS
 BEGIN
     UPDATE Detalles_factura SET id_articulo =@id_articulo, nro_factura= @nro_factura , cantidad=@cantidad
-	where id_det_factura=@id
+	WHERE nro_factura = @nro_factura AND id_det_factura = @id_det_factura
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_FACTURA]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_FACTURA]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,7 +167,7 @@ BEGIN
 	where nro_factura=@nro_factura
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_FORMAS_PAGO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_ACTUALIZAR_FORMAS_PAGO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -189,7 +180,7 @@ BEGIN
     UPDATE Formas_pago SET nombre = @nombre where id_forma_pago = @id
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_ARTICULO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_ARTICULO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,20 +192,7 @@ BEGIN
 	update Articulos set activo = 0 where id_articulo = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_DETALLE_FACTURA]    Script Date: 12/9/2025 13:17:40 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE proc [dbo].[SP_DAR_BAJA_DETALLE_FACTURA]
-@id int
-AS
-BEGIN
-	DELETE Detalles_factura
-	WHERE @id = id_det_factura
-END
-GO
-/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_FACTURA]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_FACTURA]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -227,7 +205,7 @@ BEGIN
 	update Facturas set activo = 0 where nro_factura = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_FORMA_PAGO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_DAR_BAJA_FORMA_PAGO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +217,7 @@ BEGIN
 	update Formas_pago set activo = 0 where id_forma_pago = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_ARTICULO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_ARTICULO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,21 +230,22 @@ BEGIN
 	insert into Articulos(nombre, precio_u) values(@nombre, @precio_u)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_DETALLE_FACTURAS]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_DETALLE_FACTURAS]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROC [dbo].[SP_GUARDAR_DETALLE_FACTURAS]
+	@id_det_factura int,
     @id_articulo int,
 	@nro_factura int,
 	@cantidad int
 AS
 BEGIN
-    insert into Detalles_factura(id_articulo, nro_factura, cantidad) values(@id_articulo, @nro_factura, @cantidad)
+    insert into Detalles_factura(id_det_factura, id_articulo, nro_factura, cantidad) values(@id_det_factura, @id_articulo, @nro_factura, @cantidad)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_FACTURA]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_FACTURA]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -283,7 +262,7 @@ BEGIN
 	SET @nro_factura=SCOPE_IDENTITY()
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_FORMA_PAGO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_GUARDAR_FORMA_PAGO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -296,7 +275,7 @@ BEGIN
     INSERT INTO formas_pago(nombre) values(@nombre)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_ARTICULOS]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_ARTICULOS]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -311,7 +290,7 @@ BEGIN
 	order by 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_ARTICULOS_POR_ID]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_ARTICULOS_POR_ID]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -326,12 +305,13 @@ BEGIN
 	order by 1
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_DETALLES_FACTURA]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_DETALLES_FACTURA]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROC [dbo].[SP_TRAER_DETALLES_FACTURA]
+@id INT
 AS
 BEGIN
     SELECT 
@@ -344,33 +324,11 @@ BEGIN
         (df.cantidad * a.precio_u) AS subtotal
     FROM Detalles_factura df
     JOIN Articulos a ON df.id_articulo = a.id_articulo
+    WHERE df.nro_factura = @id
     ORDER BY df.id_det_factura
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_DETALLES_FACTURA_POR_ID]    Script Date: 12/9/2025 13:17:40 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROC [dbo].[SP_TRAER_DETALLES_FACTURA_POR_ID]
-	@id INT
-AS
-BEGIN
-    SELECT 
-        df.id_det_factura,
-        df.nro_factura,
-		a.id_articulo,
-        a.nombre AS articulo,
-        df.cantidad,
-        a.precio_u,
-        (df.cantidad * a.precio_u) AS subtotal
-    FROM Detalles_factura df
-    JOIN Articulos a ON df.id_articulo = a.id_articulo
-    WHERE df.id_det_factura = @id
-    ORDER BY df.id_det_factura
-END
-GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_FACTURAS]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_FACTURAS]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -378,14 +336,14 @@ GO
 CREATE PROC [dbo].[SP_TRAER_FACTURAS]
 AS
 BEGIN
-	SELECT distinct f.nro_factura, f.fecha, fp.nombre, f.cliente, fp.Nombre
+	SELECT distinct f.nro_factura, f.fecha, fp.id_forma_pago, fp.nombre, f.cliente
 	FROM Facturas f join 
 	Formas_pago as fp on f.id_forma_pago = fp.id_forma_pago
 	WHERE f.activo = 1
 	Order by 1,2
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_FACTURAS_POR_ID]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_FACTURAS_POR_ID]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -394,14 +352,14 @@ CREATE PROC [dbo].[SP_TRAER_FACTURAS_POR_ID]
 @id int
 AS
 BEGIN
-	SELECT f.nro_factura, f.fecha, fp.nombre, f.cliente, FP.nombre	
+	SELECT f.nro_factura, f.fecha, fp.id_forma_pago, fp.nombre, f.cliente, FP.nombre	
 	FROM Facturas f join 	
 	Formas_pago fp on f.id_forma_pago=fp.id_forma_pago
 	WHERE @id= f.nro_factura and f.activo = 1
 	Order by 1,2
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_FORMA_PAGO_POR_ID]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_FORMA_PAGO_POR_ID]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -416,7 +374,7 @@ BEGIN
 	ORDER BY id_forma_pago
 END
 GO
-/****** Object:  StoredProcedure [dbo].[SP_TRAER_FORMAS_PAGO]    Script Date: 12/9/2025 13:17:40 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TRAER_FORMAS_PAGO]    Script Date: 12/9/2025 22:38:20 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
