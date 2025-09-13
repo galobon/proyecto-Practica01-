@@ -105,8 +105,7 @@
               "RelativeToolTip": "WebAPI-Practica01\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T03:05:30.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T03:05:30.699Z"
             },
             {
               "$type": "Document",
@@ -118,8 +117,7 @@
               "RelativeToolTip": "WebAPI-Practica01\\WebAPI-Practica01.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-13T03:04:33.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T03:04:33.502Z"
             },
             {
               "$type": "Document",
@@ -166,8 +164,7 @@
               "RelativeToolTip": "Dominio\\FormaPago.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:06:23.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T01:06:23.183Z"
             },
             {
               "$type": "Document",
@@ -179,8 +176,7 @@
               "RelativeToolTip": "Dominio\\Articulo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:06:17.796Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T01:06:17.796Z"
             },
             {
               "$type": "Document",
@@ -192,8 +188,7 @@
               "RelativeToolTip": "Datos\\Interfaces\\IPago.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:06:16.446Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T01:06:16.446Z"
             },
             {
               "$type": "Document",
@@ -205,8 +200,7 @@
               "RelativeToolTip": "Datos\\Interfaces\\IArticuloRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T01:06:13.916Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T01:06:13.916Z"
             },
             {
               "$type": "Document",
@@ -218,8 +212,7 @@
               "RelativeToolTip": "Datos\\Interfaces\\IFacturaRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T00:47:54.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-13T00:47:54.004Z"
             },
             {
               "$type": "Document",
@@ -231,8 +224,7 @@
               "RelativeToolTip": "Dominio\\DetalleFactura.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T23:09:37.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T23:09:37.33Z"
             },
             {
               "$type": "Document",
@@ -244,8 +236,7 @@
               "RelativeToolTip": "Datos\\Implementaciones\\PagoRepository.cs",
               "ViewState": "AgIAAG0AAAAAAAAAAAAcwIgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T22:52:52.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T22:52:52.583Z"
             },
             {
               "$type": "Document",
@@ -257,8 +248,7 @@
               "RelativeToolTip": "Datos\\Implementaciones\\ArticuloRepository.cs",
               "ViewState": "AgIAAE0AAAAAAAAAAAAIwFcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T22:51:20.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T22:51:20.932Z"
             },
             {
               "$type": "Document",
@@ -282,8 +272,7 @@
               "RelativeToolTip": "Dominio\\Factura.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T22:33:46.024Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T22:33:46.024Z"
             },
             {
               "$type": "Document",
@@ -307,8 +296,7 @@
               "RelativeToolTip": "Datos\\Implementaciones\\FacturaRepository.cs",
               "ViewState": "AgIAANYAAAAAAAAAAAAcwL8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T22:12:22.962Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T22:12:22.962Z"
             }
           ]
         }
