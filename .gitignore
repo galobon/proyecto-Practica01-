@@ -1,68 +1,14 @@
 # Visual Studio
 .vs/
-*.suo
+bin/
+obj/
 *.user
-*.userosscache
-*.sln.docstates
+*.suo
+*.dbmdl
 
-# Build results
-[Bb]in/
-[Oo]bj/
-out/
-
-# Rider
+# Rider/IntelliJ
 .idea/
 
-# NuGet
+# Archivos de paquetes
 *.nupkg
-*.snupkg
-*.nuspec
-packages/
-# The packages folder can be ignored because of PackageReference in .NET Core
-**/packages/*
-
-# Visual Studio Code
-.vscode/
-
-# Resharper
-_ReSharper*/
-*.DotSettings.user
-
-# DotCover
-*.dotCover
-
-# NCrunch
-*.ncrunch*
-.*crunch*.local.xml
-
-# Coverage
-*.coverage
-*.coveragexml
-*.testsettings
-*.testrunconfig
-*.trx
-TestResult*/ 
-
-# Others
-*.log
-*.vsmdi
-*.pidb
-*.svclog
-*.pdb
-*.cache
-*.mdb
-
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
-
-# Web
-wwwroot/lib/
-
-# Dotnet core
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# OS generated files
-.DS_Store
-Thumbs.db
+*.snk

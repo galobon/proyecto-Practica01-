@@ -1,14 +1,14 @@
-﻿using LOCURA.Datos;
-using LOCURA.Datos.Implementaciones;
-using LOCURA.Datos.Interfaces;
-using LOCURA.Dominio;
+﻿using proyectoPratica01.Datos;
+using proyectoPratica01.Datos.Implementaciones;
+using proyectoPratica01.Datos.Interfaces;
+using proyectoPratica01.Dominio;  
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOCURA.Servicios
+namespace proyectoPratica01.Servicios
 {
     public class PagoServicio
     {
@@ -19,17 +19,17 @@ namespace LOCURA.Servicios
             _repository = new PagoRepository();
         }
 
-        public List<FormaPago> GetArticulos()
+        public List<FormasPago> GetArticulos()
         {
             return _repository.GetAll();
         }
 
-        public FormaPago GetArticulo(int id)
+        public FormasPago GetArticulo(int id)
         {
             return _repository.GetById(id);
         }
 
-        public bool SaveArticulo(FormaPago fp)
+        public bool SaveArticulo(FormasPago fp)
         {
             return _repository.Save(fp);
         }
@@ -39,7 +39,7 @@ namespace LOCURA.Servicios
             return _repository.Delete(id);
         }
 
-        public bool UpdateArticulo(FormaPago fp)
+        public bool UpdateArticulo(FormasPago fp)
         {
             return _repository.Update(fp);
         }

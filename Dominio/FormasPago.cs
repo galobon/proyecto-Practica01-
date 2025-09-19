@@ -6,17 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace proyectoPratica01.Dominio;
 
-public partial class Articulo
+[Table("Formas_pago")]
+public partial class FormasPago
 {
     [Key]
-    [Column("id_articulo")]
-    public int IdArticulo { get; set; }
+    [Column("id_forma_pago")]
+    public int IdFormaPago { get; set; }
 
     [Column("nombre")]
-    [StringLength(100)]
+    [StringLength(25)]
     [Unicode(false)]
     public string? Nombre { get; set; }
-
-    [Column("precio_u")]
-    public int? PrecioU { get; set; }
 }

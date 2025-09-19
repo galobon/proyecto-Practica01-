@@ -1,4 +1,4 @@
-﻿using LOCURA.Dominio;
+﻿using proyectoPratica01.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +6,14 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOCURA.Datos.Interfaces
+namespace proyectoPratica01.Datos.Interfaces
 {
     internal interface IPago
     {
-        List<FormaPago> GetAll();
-        FormaPago GetById(int id);
-        bool Save(FormaPago fp);
+        List<FormasPago> GetAll();
+        FormasPago GetById(int id);
+        bool Save(FormasPago fp);
         bool Delete(int id);
-        bool Update(FormaPago fp);
+        bool Update(FormasPago fp);
     }
 }

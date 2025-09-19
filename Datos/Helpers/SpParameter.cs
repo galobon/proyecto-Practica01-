@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOCURA.Datos
+namespace proyectoPratica01.Datos
 {
     public class SpParameter
     {

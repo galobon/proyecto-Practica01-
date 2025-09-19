@@ -1,12 +1,12 @@
-﻿using LOCURA.Datos;
-using LOCURA.Dominio;
+﻿using proyectoPratica01.Datos;
+using proyectoPratica01.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOCURA.Servicios
+namespace proyectoPratica01.Servicios
 {
     public class ArticuloServicio
     {

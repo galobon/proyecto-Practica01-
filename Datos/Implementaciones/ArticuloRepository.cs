@@ -1,14 +1,13 @@
-﻿using LOCURA.Dominio;
+﻿using proyectoPratica01.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOCURA.Datos
+namespace proyectoPratica01.Datos
 {
     public class ArticuloRepository : IArticuloRepository
     {
@@ -28,7 +27,7 @@ namespace LOCURA.Datos
             foreach (DataRow fila in dt.Rows)
             {
                 Articulo a = new Articulo();
-                a.Id = (int)fila["id_articulo"];
+                a.IdArticulo = (int)fila["id_articulo"];
                 a.Nombre = fila["nombre"].ToString();
                 a.PrecioU = (int)fila["precio_u"];
 
@@ -59,7 +58,7 @@ namespace LOCURA.Datos
             else
                 foreach (DataRow fila in dt.Rows)
                 {
-                    a.Id = (int)fila["id_articulo"];
+                    a.IdArticulo = (int)fila["id_articulo"];
                     a.Nombre = fila["nombre"].ToString();
                     a.PrecioU = (int)fila["precio_u"];
                 }
@@ -117,7 +116,7 @@ namespace LOCURA.Datos
                 cmd.Transaction = t;
                 cmd.CommandText = "SP_ACTUALIZAR_ARTICULO";
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_articulo", a.Id);
+                cmd.Parameters.AddWithValue("@id_articulo", a.IdArticulo);
                 cmd.Parameters.AddWithValue("@nombre", a.Nombre);
                 cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
                 cmd.ExecuteNonQuery();

@@ -1,31 +1,28 @@
-﻿using LOCURA.Servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace LOCURA.Dominio
+namespace proyectoPratica01.Dominio;
+
+public partial class Factura
 {
-    public class Factura
-    {
-        public int NroFactura { get; set; }
-        public DateTime Fecha { get; set; }
-        public FormaPago FormaPago { get; set; }
-        public string Cliente { get; set; }
-        public List<DetalleFactura> Detalles {  get; set; }
+    [Key]
+    [Column("nro_factura")]
+    public int NroFactura { get; set; }
 
-        public override string ToString()
-        {
-            string detallesStr = Detalles != null ? string.Join("\n", Detalles) : "";
+    [Column("fecha")]
+    public DateTime? Fecha { get; set; }
 
-            return "Numero de la factura: " + NroFactura + "\n" +
-                   "Cliente: " + Cliente + "\n" +
-                   "Forma de pago: " + FormaPago + "\n" +
-                   "Fecha: " + Fecha + "\n" +
-                   detallesStr + "\n" +
-                   "-----------------------------------------";
-        }
-    }
+    [Column("id_forma_pago")]
+    public int? IdFormaPago { get; set; }
+
+    [Column("cliente")]
+    [StringLength(50)]
+    [Unicode(false)]
+    public string? Cliente { get; set; }
+
+    [InverseProperty("NroFacturaNavigation")]
+    public virtual ICollection<DetallesFactura> DetallesFacturas { get; set; } = new List<DetallesFactura>();
 }

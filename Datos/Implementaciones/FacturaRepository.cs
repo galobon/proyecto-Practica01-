@@ -1,14 +1,14 @@
-﻿using System;
-using LOCURA.Dominio;
+﻿using Microsoft.Data.SqlClient;
+using proyectoPratica01.Dominio;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.Data.SqlClient;
 
-namespace LOCURA.Datos
+namespace proyectoPratica01.Datos
 {
     public class FacturaRepository : IFacturaRepository
     {
@@ -30,26 +30,24 @@ namespace LOCURA.Datos
                 Factura f = new Factura();
                 f.NroFactura = (int)fila["nro_factura"];
                 f.Fecha = (DateTime)fila["fecha"];
-                f.FormaPago = new FormaPago();
-                f.FormaPago.Id = (int)fila["id_forma_pago"];
-                f.FormaPago.Nombre = fila["nombre"].ToString();
+                f.IdFormaPago = (int)fila["id_forma_pago"];
                 f.Cliente = fila["cliente"].ToString();
-                f.Detalles = new List<DetalleFactura>();
+                f.DetallesFacturas = new List<DetallesFactura>();
                 var param = new List<SpParameter>() { new SpParameter("@id", f.NroFactura) };
                 var dtDetalles = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_DETALLES_FACTURA", param);
 
                 foreach (DataRow filaDetalle in dtDetalles.Rows)
                 {
-                    DetalleFactura df = new DetalleFactura();
+                    DetallesFactura df = new DetallesFactura();
                     df.NroFactura = f.NroFactura;
-                    df.Id = (int)filaDetalle["id_det_factura"];
+                    df.IdDetFactura = (int)filaDetalle["id_det_factura"];
                     df.Cantidad = (int)filaDetalle["cantidad"];
                     df.Articulo = new Articulo();
-                    df.Articulo.Id = (int)filaDetalle["id_articulo"];
+                    df.Articulo.IdArticulo = (int)filaDetalle["id_articulo"];
                     df.Articulo.Nombre = filaDetalle["articulo"].ToString();
                     df.Articulo.PrecioU = (int)filaDetalle["precio_u"];
 
-                    f.Detalles.Add(df);
+                    f.DetallesFacturas.Add(df);
                 }
 
                 facturas.Add(f);
@@ -81,27 +79,25 @@ namespace LOCURA.Datos
                 {
                     f.NroFactura = (int)fila["nro_factura"];
                     f.Fecha = (DateTime)fila["fecha"];
-                    f.FormaPago = new FormaPago();
-                    f.FormaPago.Id = (int)fila["id_forma_pago"];
-                    f.FormaPago.Nombre = fila["nombre"].ToString();
+                    f.IdFormaPago = (int)fila["id_forma_pago"];
                     f.Cliente = fila["cliente"].ToString();
-                    f.Detalles = new List<DetalleFactura>();
+                    f.DetallesFacturas = new List<DetallesFactura>();
 
                     var paramDet = new List<SpParameter>() { new SpParameter("@id", f.NroFactura) };
                     var dtDetalles = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_DETALLES_FACTURA", param);
 
                     foreach (DataRow filaDetalle in dtDetalles.Rows)
                     {
-                        DetalleFactura df = new DetalleFactura();
+                        DetallesFactura df = new DetallesFactura();
                         df.NroFactura = f.NroFactura;
-                        df.Id = (int)filaDetalle["id_det_factura"];
+                        df.IdDetFactura = (int)filaDetalle["id_det_factura"];
                         df.Cantidad = (int)filaDetalle["cantidad"];
                         df.Articulo = new Articulo();
-                        df.Articulo.Id = (int)filaDetalle["id_articulo"];
+                        df.Articulo.IdArticulo = (int)filaDetalle["id_articulo"];
                         df.Articulo.Nombre = filaDetalle["articulo"].ToString();
                         df.Articulo.PrecioU = (int)filaDetalle["precio_u"];
 
-                        f.Detalles.Add(df);
+                        f.DetallesFacturas.Add(df);
                     }
                 }
 
@@ -124,7 +120,7 @@ namespace LOCURA.Datos
                 cmd.CommandText = "SP_GUARDAR_FACTURA";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@fecha", f.Fecha);
-                cmd.Parameters.AddWithValue("@id_forma_pago", f.FormaPago.Id);
+                cmd.Parameters.AddWithValue("@id_forma_pago", f.IdFormaPago);
                 cmd.Parameters.AddWithValue("@cliente", f.Cliente);
 
                 SqlParameter pOut = new SqlParameter();
@@ -138,12 +134,12 @@ namespace LOCURA.Datos
                 int nroFactura = (int)pOut.Value;
                 int idDetalle = 1;
 
-                foreach (DetalleFactura item in f.Detalles)
+                foreach (DetallesFactura item in f.DetallesFacturas)
                 {
                     cmdDetalle = new SqlCommand("SP_GUARDAR_DETALLE_FACTURAS",cnn,t);
                     cmdDetalle.CommandType = CommandType.StoredProcedure;
                     cmdDetalle.Parameters.AddWithValue("@id_det_factura", idDetalle);
-                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.Id);
+                    cmdDetalle.Parameters.AddWithValue(@"id_articulo", item.Articulo.IdArticulo);
                     cmdDetalle.Parameters.AddWithValue("@nro_factura", nroFactura);
                     cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
                     cmdDetalle.ExecuteNonQuery();
@@ -184,18 +180,18 @@ namespace LOCURA.Datos
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@nro_factura", id);
                 cmd.Parameters.AddWithValue("@fecha", f.Fecha);
-                cmd.Parameters.AddWithValue("@id_forma_pago", f.FormaPago.Id);
+                cmd.Parameters.AddWithValue("@id_forma_pago", f.IdFormaPago);
                 cmd.Parameters.AddWithValue("@cliente", f.Cliente);
                 cmd.ExecuteNonQuery();
 
                 SqlCommand cmdDetalle;
                 int idDetalle = 1;
-                foreach (DetalleFactura item in f.Detalles)
+                foreach (DetallesFactura item in f.DetallesFacturas)
                 {
                     cmdDetalle = new SqlCommand("SP_ACTUALIZAR_DETALLE_FACTURAS", cnn, t);
                     cmdDetalle.CommandType = CommandType.StoredProcedure;
                     cmdDetalle.Parameters.AddWithValue("@id_det_factura", idDetalle);
-                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.Id);
+                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.IdArticulo);
                     cmdDetalle.Parameters.AddWithValue("@nro_factura", id);
                     cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
                     cmdDetalle.ExecuteNonQuery();

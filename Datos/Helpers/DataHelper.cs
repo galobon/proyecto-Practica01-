@@ -5,9 +5,8 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Remoting.Channels;
 
-namespace LOCURA.Datos
+namespace proyectoPratica01.Datos
 {
     public class DataHelper
     {
