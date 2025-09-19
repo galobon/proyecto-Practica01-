@@ -67,7 +67,7 @@ namespace WebAPI_Practica01.Controllers
         {
             try
             {
-                articulo.Id = id; // Asegurarse que el Id esté asignado
+                articulo.Id = id;
                 bool result = _service.UpdateArticulo(articulo);
                 if (!result)
                     return BadRequest("Articulo con datos invalidos");

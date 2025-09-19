@@ -67,7 +67,7 @@ namespace WebAPI_Practica01.Controllers
         {
             try
             {
-                fp.Id = id; // Asegurarse que el Id esté asignado
+                fp.Id = id;
                 bool result = _service.UpdateArticulo(fp);
                 if (!result)
                     return BadRequest("Forma de pago con datos invalidos");
