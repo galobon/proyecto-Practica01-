@@ -1,4 +1,4 @@
-﻿using proyectoPratica01.Dominio;
+﻿using proyectoPratica01.Dominio.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,134 +6,91 @@ using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using proyectoPratica01.Datos.Interfaces;
+using proyectoPratica01.Dominio.Contexto;
+using proyectoPratica01.Dominio.DTOs;
 
-namespace proyectoPratica01.Datos
+namespace proyectoPratica01.Datos.Implementaciones
 {
     public class ArticuloRepository : IArticuloRepository
     {
+        private ProyectoContext _context;
+
+        public ArticuloRepository(ProyectoContext context)
+        {
+            _context = context;
+        }
+
         public bool Delete(int id)
         {
-            List<SpParameter> param = new List<SpParameter>() { new SpParameter("@id", id) };
-
-            return DataHelper.GetInstance().ExecuteSpDml("SP_DAR_BAJA_ARTICULO", param);
-        }
-
-        public List<Articulo> GetAll()
-        {
-            List<Articulo> articulos = new List<Articulo>();
-
-            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_ARTICULOS");
-
-            foreach (DataRow fila in dt.Rows)
+            var articulo = _context.Articulos.Find(id);
+            if (articulo != null)
             {
-                Articulo a = new Articulo();
-                a.IdArticulo = (int)fila["id_articulo"];
-                a.Nombre = fila["nombre"].ToString();
-                a.PrecioU = (int)fila["precio_u"];
-
-                articulos.Add(a);
+                articulo.Activo = false;
+                _context.SaveChanges();
+                return true;
             }
-
-            return articulos;
+            return false;
         }
 
-        public Articulo? GetById(int id)
+        public List<ArticuloDTO> GetAll()
         {
-            Articulo a = new Articulo();
+            return _context.Articulos
+                           .Where(a => a.Activo)
+                           .Select(a => new ArticuloDTO
+                           {
+                               IdArticulo = a.IdArticulo,
+                               Nombre = a.Nombre,
+                               PrecioU = a.PrecioU
+                           })
+                           .ToList();
+        }
 
-            List<SpParameter> param = new List<SpParameter>()
-            {
-                new SpParameter()
+        public ArticuloDTO? GetById(int id)
+        {
+            var a = _context.Articulos.Find(id);
+            if (a != null && a.Activo)
+                return new ArticuloDTO
                 {
-                    Name = "@id",
-                    Valor = id
-                }
-            };
+                    IdArticulo = a.IdArticulo,
+                    Nombre = a.Nombre,
+                    PrecioU = a.PrecioU
+                };
+            return null;
+        }
 
-            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_ARTICULOS_POR_ID", param);
-
-
-            if (dt.Rows.Count == 0)
-                return null;
-            else
-                foreach (DataRow fila in dt.Rows)
+        public bool Save(ArticuloDTO a)
+        {
+            if(a != null)
+            {
+                _context.Articulos.Add(new Articulo
                 {
-                    a.IdArticulo = (int)fila["id_articulo"];
-                    a.Nombre = fila["nombre"].ToString();
-                    a.PrecioU = (int)fila["precio_u"];
+                    Nombre = a.Nombre,
+                    PrecioU = a.PrecioU,
+                    Activo = true
+                });
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool Update(int id, ArticuloDTO a)
+        {
+            if(a != null)
+            {
+                var aUpdate = _context.Articulos.Find(id);
+                if (aUpdate != null && aUpdate.Activo)
+                {
+                    aUpdate.Nombre = a.Nombre;
+                    aUpdate.PrecioU = a.PrecioU;
+                    _context.SaveChanges();
+
+                    return true;
                 }
 
-            return a;
-        }
-
-        public bool Save(Articulo a)
-        {
-            bool ok = true;
-            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
-            SqlTransaction t = null;
-            SqlCommand cmd = new SqlCommand();
-
-            try
-            {
-                cnn.Open();
-                t = cnn.BeginTransaction();
-                cmd.Connection = cnn;
-                cmd.Transaction = t;
-                cmd.CommandText = "SP_GUARDAR_ARTICULO";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre", a.Nombre);
-                cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
-                cmd.ExecuteNonQuery();
-                t.Commit();
             }
-            catch (Exception)
-            {
-                if (t != null)
-                    t.Rollback();
-                ok = false;
-            }
-            finally
-            {
-                if (cnn != null && cnn.State == ConnectionState.Open)
-                    cnn.Close();
-            }
-            return ok;
-        }
-
-        public bool Update(Articulo a)
-        {
-
-            bool ok = true;
-            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
-            SqlTransaction t = null;
-            SqlCommand cmd = new SqlCommand();
-
-            try
-            {
-                cnn.Open();
-                t = cnn.BeginTransaction();
-                cmd.Connection = cnn;
-                cmd.Transaction = t;
-                cmd.CommandText = "SP_ACTUALIZAR_ARTICULO";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_articulo", a.IdArticulo);
-                cmd.Parameters.AddWithValue("@nombre", a.Nombre);
-                cmd.Parameters.AddWithValue("@precio_u", a.PrecioU);
-                cmd.ExecuteNonQuery();
-                t.Commit();
-            }
-            catch (Exception)
-            {
-                if (t != null)
-                    t.Rollback();
-                ok = false;
-            }
-            finally
-            {
-                if (cnn != null && cnn.State == ConnectionState.Open)
-                    cnn.Close();
-            }
-            return ok;
+            return false;
         }
     }
 }

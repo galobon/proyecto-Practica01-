@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proyectoPratica01.Dominio;
+using proyectoPratica01.Dominio.DTOs;
 using proyectoPratica01.Servicios;
 
 namespace WebApi_ProyectoPractica01.Controllers
@@ -11,9 +12,9 @@ namespace WebApi_ProyectoPractica01.Controllers
     {
         private PagoServicio _service;
 
-        public PagoController()
+        public PagoController(PagoServicio servicio)
         {
-            _service = new PagoServicio();
+            _service = servicio;
         }
 
         [HttpGet]
@@ -47,14 +48,14 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(FormasPago fp)
+        public IActionResult Post(FormaPagoDTO fp)
         {
             try
             {
                 bool result = _service.SaveArticulo(fp);
                 if (!result)
                     return BadRequest("Forma de pago con datos invalidos");
-                return Ok("Se cargo la forma de pago con exito!!!");
+                return Ok("La forma de pago se cargo con exito!!!");
             }
             catch (Exception ex)
             {
@@ -63,12 +64,12 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] FormasPago fp)
+        public IActionResult Put(int id, [FromBody] FormaPagoDTO fp)
         {
             try
             {
                 fp.IdFormaPago = id;
-                bool result = _service.UpdateArticulo(fp);
+                bool result = _service.UpdateArticulo(id, fp);
                 if (!result)
                     return BadRequest("Forma de pago con datos invalidos");
                 return Ok("Se actualizo la forma de pago con exito!!!");

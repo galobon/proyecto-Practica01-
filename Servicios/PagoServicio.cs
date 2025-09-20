@@ -1,7 +1,7 @@
 ﻿using proyectoPratica01.Datos;
-using proyectoPratica01.Datos.Implementaciones;
 using proyectoPratica01.Datos.Interfaces;
-using proyectoPratica01.Dominio;  
+using proyectoPratica01.Dominio;
+using proyectoPratica01.Dominio.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,24 +12,24 @@ namespace proyectoPratica01.Servicios
 {
     public class PagoServicio
     {
-        private IPago _repository;
+        private IPagoRepository _repository;
 
-        public PagoServicio()
+        public PagoServicio(IPagoRepository repository)
         {
-            _repository = new PagoRepository();
+            _repository = repository;
         }
 
-        public List<FormasPago> GetArticulos()
+        public List<FormaPagoDTO> GetArticulos()
         {
             return _repository.GetAll();
         }
 
-        public FormasPago GetArticulo(int id)
+        public FormaPagoDTO GetArticulo(int id)
         {
             return _repository.GetById(id);
         }
 
-        public bool SaveArticulo(FormasPago fp)
+        public bool SaveArticulo(FormaPagoDTO fp)
         {
             return _repository.Save(fp);
         }
@@ -39,9 +39,9 @@ namespace proyectoPratica01.Servicios
             return _repository.Delete(id);
         }
 
-        public bool UpdateArticulo(FormasPago fp)
+        public bool UpdateArticulo(int id, FormaPagoDTO fp)
         {
-            return _repository.Update(fp);
+            return _repository.Update(id, fp);
         }
     }
 }

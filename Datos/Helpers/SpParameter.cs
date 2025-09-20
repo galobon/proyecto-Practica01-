@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proyectoPratica01.Datos
+namespace proyectoPratica01.Datos.Helpers
 {
     public class SpParameter
     {

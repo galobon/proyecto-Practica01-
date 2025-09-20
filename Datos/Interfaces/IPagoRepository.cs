@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace proyectoPratica01.Datos.Interfaces
 {
-    public interface IArticuloRepository
+    public interface IPagoRepository
     {
-        List<ArticuloDTO> GetAll();
-        ArticuloDTO GetById(int id);
-        bool Save(ArticuloDTO a);
+        List<FormaPagoDTO> GetAll();
+        FormaPagoDTO GetById(int id);
+        bool Save(FormaPagoDTO fp);
         bool Delete(int id);
-        bool Update(int id, ArticuloDTO a);
+        bool Update(int id, FormaPagoDTO fp);
     }
 }

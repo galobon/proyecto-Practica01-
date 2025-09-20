@@ -1,5 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
-using proyectoPratica01.Dominio;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using proyectoPratica01.Datos.Interfaces;
+using proyectoPratica01.Dominio.Clases;
+using proyectoPratica01.Dominio.Contexto;
+using proyectoPratica01.Dominio.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,212 +13,143 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace proyectoPratica01.Datos
+namespace proyectoPratica01.Datos.Implementaciones
 {
     public class FacturaRepository : IFacturaRepository
     {
+        private ProyectoContext _context;
+        public FacturaRepository(ProyectoContext context)
+        {
+            _context = context;
+        }
         public bool Delete(int id)
         {
-            List<SpParameter> param = new List<SpParameter>() { new SpParameter("@id", id) };
-
-            return DataHelper.GetInstance().ExecuteSpDml("SP_DAR_BAJA_FACTURA", param);
+            var factura = _context.Facturas.Find(id);
+            if (factura != null)
+            {
+                factura.Activo = false;
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-        public List<Factura> GetAll()
+        public List<FacturaDTO> GetAll()
         {
-            List<Factura> facturas = new List<Factura>();
-
-            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_FACTURAS");
-
-            foreach (DataRow fila in dt.Rows)
+            var facturas = _context.Facturas
+            .Where(f => f.Activo)
+            .Select(f => new FacturaDTO
             {
-                Factura f = new Factura();
-                f.NroFactura = (int)fila["nro_factura"];
-                f.Fecha = (DateTime)fila["fecha"];
-                f.IdFormaPago = (int)fila["id_forma_pago"];
-                f.Cliente = fila["cliente"].ToString();
-                f.DetallesFacturas = new List<DetallesFactura>();
-                var param = new List<SpParameter>() { new SpParameter("@id", f.NroFactura) };
-                var dtDetalles = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_DETALLES_FACTURA", param);
-
-                foreach (DataRow filaDetalle in dtDetalles.Rows)
+                NroFactura = f.NroFactura,
+                Fecha = f.Fecha,
+                Cliente = f.Cliente,
+                FormaPago = new FormaPagoDTO
+                    {
+                        IdFormaPago = f.IdFormaPagoNavigation.IdFormaPago,
+                        Nombre = f.IdFormaPagoNavigation.Nombre
+                    },
+                DetallesFacturas = f.DetallesFacturas.Select(df => new DetallesDTO
                 {
-                    DetallesFactura df = new DetallesFactura();
-                    df.NroFactura = f.NroFactura;
-                    df.IdDetFactura = (int)filaDetalle["id_det_factura"];
-                    df.Cantidad = (int)filaDetalle["cantidad"];
-                    df.Articulo = new Articulo();
-                    df.Articulo.IdArticulo = (int)filaDetalle["id_articulo"];
-                    df.Articulo.Nombre = filaDetalle["articulo"].ToString();
-                    df.Articulo.PrecioU = (int)filaDetalle["precio_u"];
+                    NroFactura = df.NroFactura,
+                    IdDetFactura = df.IdDetFactura,
+                    Cantidad = df.Cantidad,
+                    Articulo = new ArticuloDTO
+                    {
+                        IdArticulo = df.IdArticuloNavigation.IdArticulo,
+                        Nombre = df.IdArticuloNavigation.Nombre,
+                        PrecioU = df.IdArticuloNavigation.PrecioU
+                    }
+                }).ToList()
+            })
+            .ToList();
 
-                    f.DetallesFacturas.Add(df);
-                }
-
-                facturas.Add(f);
-            }
 
             return facturas;
         }
 
-        public Factura? GetById(int id)
+        public FacturaDTO? GetById(int id)
         {
-            Factura f = new Factura();
-
-            List<SpParameter> param = new List<SpParameter>()
+            var f = _context.Facturas.Include(f => f.IdFormaPagoNavigation)
+                                     .Include(f => f.DetallesFacturas)
+                                        .ThenInclude(df => df.IdArticuloNavigation)
+                                     .FirstOrDefault(f => f.NroFactura == id && f.Activo);
+            if(f != null)
             {
-                new SpParameter()
+                return new FacturaDTO
                 {
-                    Name = "@id",
-                    Valor = id
-                }
-            };  
-
-            var dt = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_FACTURAS_POR_ID", param);
-
-
-            if (dt.Rows.Count == 0)
-                return null;
-            else
-                foreach (DataRow fila in dt.Rows)
-                {
-                    f.NroFactura = (int)fila["nro_factura"];
-                    f.Fecha = (DateTime)fila["fecha"];
-                    f.IdFormaPago = (int)fila["id_forma_pago"];
-                    f.Cliente = fila["cliente"].ToString();
-                    f.DetallesFacturas = new List<DetallesFactura>();
-
-                    var paramDet = new List<SpParameter>() { new SpParameter("@id", f.NroFactura) };
-                    var dtDetalles = DataHelper.GetInstance().ExecuteSPQuery("SP_TRAER_DETALLES_FACTURA", param);
-
-                    foreach (DataRow filaDetalle in dtDetalles.Rows)
+                    NroFactura = f.NroFactura,
+                    Fecha = f.Fecha,
+                    Cliente = f.Cliente,
+                    FormaPago = new FormaPagoDTO
                     {
-                        DetallesFactura df = new DetallesFactura();
-                        df.NroFactura = f.NroFactura;
-                        df.IdDetFactura = (int)filaDetalle["id_det_factura"];
-                        df.Cantidad = (int)filaDetalle["cantidad"];
-                        df.Articulo = new Articulo();
-                        df.Articulo.IdArticulo = (int)filaDetalle["id_articulo"];
-                        df.Articulo.Nombre = filaDetalle["articulo"].ToString();
-                        df.Articulo.PrecioU = (int)filaDetalle["precio_u"];
-
-                        f.DetallesFacturas.Add(df);
-                    }
-                }
-
-             return f;
+                        IdFormaPago = f.IdFormaPagoNavigation.IdFormaPago,
+                        Nombre = f.IdFormaPagoNavigation.Nombre
+                    },
+                    DetallesFacturas = f.DetallesFacturas.Select(df => new DetallesDTO
+                    {
+                        NroFactura = df.NroFactura,
+                        IdDetFactura = df.IdDetFactura,
+                        Cantidad = df.Cantidad,
+                        Articulo = new ArticuloDTO
+                        {
+                            IdArticulo = df.IdArticuloNavigation.IdArticulo,
+                            Nombre = df.IdArticuloNavigation.Nombre,
+                            PrecioU = df.IdArticuloNavigation.PrecioU
+                        }
+                    }).ToList()
+                };
+            }
+            return null;
         }
 
-        public bool Save(Factura f)
+        public bool Save(FacturaDTO f)
         {
-            bool ok = true;
-            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
-            SqlTransaction t = null;
-            SqlCommand cmd = new SqlCommand();
-
-            try
+            if (f != null)
             {
-                cnn.Open();
-                t = cnn.BeginTransaction();
-                cmd.Connection = cnn;
-                cmd.Transaction = t;
-                cmd.CommandText = "SP_GUARDAR_FACTURA";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@fecha", f.Fecha);
-                cmd.Parameters.AddWithValue("@id_forma_pago", f.IdFormaPago);
-                cmd.Parameters.AddWithValue("@cliente", f.Cliente);
-
-                SqlParameter pOut = new SqlParameter();
-                pOut.ParameterName = "@nro_factura";
-                pOut.DbType = DbType.Int32;
-                pOut.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pOut);
-                cmd.ExecuteNonQuery();
-
-                SqlCommand cmdDetalle;
-                int nroFactura = (int)pOut.Value;
                 int idDetalle = 1;
-
-                foreach (DetallesFactura item in f.DetallesFacturas)
+                int nextNroFactura = (_context.Facturas.Max(f => (int?)f.NroFactura) ?? 0) + 1;
+                _context.Facturas.Add(new Factura
                 {
-                    cmdDetalle = new SqlCommand("SP_GUARDAR_DETALLE_FACTURAS",cnn,t);
-                    cmdDetalle.CommandType = CommandType.StoredProcedure;
-                    cmdDetalle.Parameters.AddWithValue("@id_det_factura", idDetalle);
-                    cmdDetalle.Parameters.AddWithValue(@"id_articulo", item.Articulo.IdArticulo);
-                    cmdDetalle.Parameters.AddWithValue("@nro_factura", nroFactura);
-                    cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
-                    cmdDetalle.ExecuteNonQuery();
-                    idDetalle++;
-                }
-                t.Commit();
+                    Activo = true,
+                    Fecha = f.Fecha,
+                    Cliente = f.Cliente,
+                    IdFormaPago = f.FormaPago.IdFormaPago,
+                    DetallesFacturas = f.DetallesFacturas.Select(df => new DetallesFactura
+                    {
+                        NroFactura = nextNroFactura,
+                        IdDetFactura = idDetalle++,
+                        IdArticulo = df.Articulo.IdArticulo,
+                        Cantidad = df.Cantidad
+                    }).ToList()
+                });
+                _context.SaveChanges();
+                return true;
             }
-            catch (Exception)
-            {
-
-                if (t != null) 
-                    t.Rollback();
-                ok = false;
-            }
-            finally
-            {
-                if (cnn != null && cnn.State == ConnectionState.Open)
-                    cnn.Close();
-            }
-
-            return ok;
+            return false;
         }
 
-        public bool Update(int id, Factura f)
+        public bool Update(int id, FacturaDTO f)
         {
-            bool ok = true;
-            SqlConnection cnn = DataHelper.GetInstance().GetConnection();
-            SqlTransaction t = null;
-            SqlCommand cmd = new SqlCommand();
-
-            try
+            var fUpdate = _context.Facturas.Include(f => f.DetallesFacturas)
+                                           .FirstOrDefault(f => f.NroFactura == id && f.Activo);
+            if (fUpdate != null)
             {
-                cnn.Open();
-                t = cnn.BeginTransaction();
-                cmd.Connection = cnn;
-                cmd.Transaction = t;
-                cmd.CommandText = "SP_ACTUALIZAR_FACTURA";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nro_factura", id);
-                cmd.Parameters.AddWithValue("@fecha", f.Fecha);
-                cmd.Parameters.AddWithValue("@id_forma_pago", f.IdFormaPago);
-                cmd.Parameters.AddWithValue("@cliente", f.Cliente);
-                cmd.ExecuteNonQuery();
-
-                SqlCommand cmdDetalle;
                 int idDetalle = 1;
-                foreach (DetallesFactura item in f.DetallesFacturas)
+                fUpdate.NroFactura = id;
+                fUpdate.Fecha = f.Fecha;
+                fUpdate.Cliente = f.Cliente;
+                fUpdate.IdFormaPago = f.FormaPago.IdFormaPago;
+                fUpdate.DetallesFacturas = f.DetallesFacturas.Select(df => new DetallesFactura
                 {
-                    cmdDetalle = new SqlCommand("SP_ACTUALIZAR_DETALLE_FACTURAS", cnn, t);
-                    cmdDetalle.CommandType = CommandType.StoredProcedure;
-                    cmdDetalle.Parameters.AddWithValue("@id_det_factura", idDetalle);
-                    cmdDetalle.Parameters.AddWithValue("@id_articulo", item.Articulo.IdArticulo);
-                    cmdDetalle.Parameters.AddWithValue("@nro_factura", id);
-                    cmdDetalle.Parameters.AddWithValue("@cantidad", item.Cantidad);
-                    cmdDetalle.ExecuteNonQuery();
-                    idDetalle++;
-                }
-                t.Commit();
-
-
+                    NroFactura = id,
+                    IdDetFactura = idDetalle++,
+                    IdArticulo = df.Articulo.IdArticulo,
+                    Cantidad = df.Cantidad
+                }).ToList();
+                _context.SaveChanges();
+                return true;
             }
-            catch (Exception)
-            {
-                if (t != null) 
-                    t.Rollback();
-                ok = false;
-            }
-            finally
-            {
-                if(cnn != null && cnn.State == ConnectionState.Open)
-                    cnn.Close();
-            }
-
-            return ok;
+            return false;
         }
     }
 }

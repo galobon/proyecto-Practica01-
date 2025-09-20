@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proyectoPratica01.Dominio;
+using proyectoPratica01.Dominio.DTOs;
 using proyectoPratica01.Servicios;
 
 namespace WebApi_ProyectoPractica01.Controllers
@@ -11,9 +12,9 @@ namespace WebApi_ProyectoPractica01.Controllers
     {
         private ArticuloServicio _service;
 
-        public ArticuloController()
+        public ArticuloController(ArticuloServicio servicio)
         {
-            _service = new ArticuloServicio();
+            _service = servicio;
         }
 
         [HttpGet]
@@ -47,7 +48,7 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Articulo articulo)
+        public IActionResult Post(ArticuloDTO articulo)
         {
             try
             {
@@ -63,12 +64,12 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Articulo articulo)
+        public IActionResult Put(int id, [FromBody] ArticuloDTO articulo)
         {
             try
             {
                 articulo.IdArticulo = id;
-                bool result = _service.UpdateArticulo(articulo);
+                bool result = _service.UpdateArticulo(id, articulo);
                 if (!result)
                     return BadRequest("Articulo con datos invalidos");
                 return Ok("Se actualizo el artículo con exito!!!");

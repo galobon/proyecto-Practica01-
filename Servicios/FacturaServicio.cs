@@ -1,5 +1,7 @@
 ﻿using proyectoPratica01.Datos;
+using proyectoPratica01.Datos.Interfaces;
 using proyectoPratica01.Dominio;
+using proyectoPratica01.Dominio.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +12,32 @@ namespace proyectoPratica01.Servicios
 {
     public class FacturaServicio
     {
-        private IFacturaRepository _reposritory;
-        public FacturaServicio()
+        private IFacturaRepository _repository;
+        public FacturaServicio(IFacturaRepository repository)
         {
-            _reposritory = new FacturaRepository();
+            _repository = repository;
         }
 
-        public List<Factura> GetFacturas()
+        public List<FacturaDTO> GetFacturas()
         {
-            return _reposritory.GetAll();
+            return _repository.GetAll();
         }
 
-        public Factura GetFactura(int id)
+        public FacturaDTO GetFactura(int id)
         {
-            return _reposritory.GetById(id);
+            return _repository.GetById(id);
         }
-        public bool SaveFactura(Factura f)
+        public bool SaveFactura(FacturaDTO f)
         {
-            return _reposritory.Save(f);
+            return _repository.Save(f);
         }
         public bool DeleteFactura(int id) 
         {
-            return _reposritory.Delete(id);
+            return _repository.Delete(id);
         }
-        public bool UpdateFactura(int id, Factura f)
+        public bool UpdateFactura(int id, FacturaDTO f)
         {
-            return _reposritory.Update(id, f);
+            return _repository.Update(id, f);
         }
     }
 }

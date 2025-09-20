@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proyectoPratica01.Dominio;
+using proyectoPratica01.Dominio.DTOs;
 
 namespace WebApi_ProyectoPractica01.Controllers
 {
@@ -11,9 +12,9 @@ namespace WebApi_ProyectoPractica01.Controllers
     {
         private FacturaServicio _service;
 
-        public FacturaController()
+        public FacturaController(FacturaServicio service)
         {
-            _service = new FacturaServicio();
+            _service = service;
         }
 
 
@@ -48,7 +49,7 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Factura factura)
+        public IActionResult Post(FacturaDTO factura)
         {
             try
             {
@@ -64,14 +65,14 @@ namespace WebApi_ProyectoPractica01.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Factura factura)
+        public IActionResult Put(int id, [FromBody] FacturaDTO factura)
         {
             try
             {
                 bool result = _service.UpdateFactura(id, factura);
                 if (!result)
                     return BadRequest("Factura con datos invalidos");
-                return Ok("Se cargo la factura con exito!!!");
+                return Ok("Se actualizo la factura con exito!!!");
             }
             catch (Exception ex)
             {
