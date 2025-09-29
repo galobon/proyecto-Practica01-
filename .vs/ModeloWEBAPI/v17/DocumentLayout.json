@@ -1,0 +1,247 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\servicios\\envioservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\dtos\\detalleenviodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\repositorios\\efenviorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\datos\\models\\detalleenvio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\datos\\models\\envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|c:\\users\\galbo\\source\\repos\\modelowebapi\\controllers\\envioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|solutionrelative:controllers\\envioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|c:\\users\\galbo\\source\\repos\\modelowebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\servicios\\ienvioservicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\datos\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\datos\\models\\enviosdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\dtos\\productodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\dtos\\enviodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B53020B3-74BB-42D5-B94C-C29032316948}|..\\ModeloParcial1PII\\ModeloParcial1PII.csproj|c:\\users\\galbo\\source\\repos\\modeloparcial1pii\\repositorios\\ienviorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|c:\\users\\galbo\\source\\repos\\modelowebapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9D1AC5BA-CB31-418C-82DA-61D2AFF2F6DC}|ModeloWEBAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EnviosController.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\Controllers\\EnviosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EnviosController.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\Controllers\\EnviosController.cs",
+              "RelativeToolTip": "Controllers\\EnviosController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T00:23:12.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IEnvioServicio.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Servicios\\IEnvioServicio.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Servicios\\IEnvioServicio.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Servicios\\IEnvioServicio.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Servicios\\IEnvioServicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T23:54:31.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnvioServicio.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Servicios\\EnvioServicio.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Servicios\\EnvioServicio.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Servicios\\EnvioServicio.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Servicios\\EnvioServicio.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAowDIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T23:54:26.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "EnvioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\EnvioDTO.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\DTOs\\EnvioDTO.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\EnvioDTO.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\DTOs\\EnvioDTO.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB4AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:57:28.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IEnvioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Repositorios\\IEnvioRepository.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Repositorios\\IEnvioRepository.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Repositorios\\IEnvioRepository.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Repositorios\\IEnvioRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T23:09:58.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EFEnvioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Repositorios\\EFEnvioRepository.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Repositorios\\EFEnvioRepository.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Repositorios\\EFEnvioRepository.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Repositorios\\EFEnvioRepository.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowCUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T23:00:19.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\ProductoDTO.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\DTOs\\ProductoDTO.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\ProductoDTO.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\DTOs\\ProductoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T22:46:05.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DetalleEnvioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\DetalleEnvioDTO.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\DTOs\\DetalleEnvioDTO.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\DTOs\\DetalleEnvioDTO.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\DTOs\\DetalleEnvioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T22:44:12.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-28T21:51:32.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloWEBAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:51:13.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\Producto.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Datos\\Models\\Producto.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\Producto.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Datos\\Models\\Producto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:48:31.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EnviosDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\EnviosDBContext.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Datos\\Models\\EnviosDBContext.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\EnviosDBContext.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Datos\\Models\\EnviosDBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:47:26.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Envio.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\Envio.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Datos\\Models\\Envio.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\Envio.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Datos\\Models\\Envio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:48:27.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DetalleEnvio.cs",
+              "DocumentMoniker": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\DetalleEnvio.cs",
+              "RelativeDocumentMoniker": "..\\ModeloParcial1PII\\Datos\\Models\\DetalleEnvio.cs",
+              "ToolTip": "C:\\Users\\galbo\\source\\repos\\ModeloParcial1PII\\Datos\\Models\\DetalleEnvio.cs",
+              "RelativeToolTip": "..\\ModeloParcial1PII\\Datos\\Models\\DetalleEnvio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-28T21:48:21.4Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
